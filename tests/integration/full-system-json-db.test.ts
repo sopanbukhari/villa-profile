@@ -187,4 +187,34 @@ describe('End-to-End System Tests with JSON Database', () => {
 
     expect(inquiryRes.body.data.whatsappLink).toContain('https://wa.me/6289876543210?text=');
   });
+
+  it('Admin creates manual booking directly from WhatsApp deal', async () => {
+    const manualBookingRes = await request(app)
+      .post('/api/admin/bookings')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        villaId: 'primary',
+        customerName: 'Hendra Wijaya',
+        customerPhone: '081299887766',
+        customerEmail: 'hendra@example.com',
+        checkIn: '2027-05-10',
+        checkOut: '2027-05-14',
+        guestCount: 4,
+        totalAmountIdr: 14000000,
+        status: 'CONFIRMED',
+        adminNotes: 'Booking deal via WhatsApp, transfer BCA lunas',
+      });
+
+    expect(manualBookingRes.status).toBe(201);
+    expect(manualBookingRes.body.success).toBe(true);
+    expect(manualBookingRes.body.data.bookingReference).toMatch(/^VIL-\d{6}-[0-9A-F]{6}$/);
+    expect(manualBookingRes.body.data.status).toBe('CONFIRMED');
+    expect(manualBookingRes.body.data.customerName).toBe('Hendra Wijaya');
+
+    // Dates 2027-05-10 to 2027-05-14 are now locked
+    const availCheck = await request(app).get(
+      '/api/villas/primary/availability?checkIn=2027-05-11&checkOut=2027-05-13&guests=2'
+    );
+    expect(availCheck.body.data.available).toBe(false);
+  });
 });

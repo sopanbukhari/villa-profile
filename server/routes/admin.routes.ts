@@ -17,6 +17,7 @@ router.get('/dashboard', AdminController.getDashboard);
 
 // Bookings
 router.get('/bookings', AdminController.getBookings);
+router.post('/bookings', AdminController.createBooking);
 router.patch('/bookings/:id/status', AdminController.updateBookingStatus);
 
 // Blocked Dates

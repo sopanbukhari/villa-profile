@@ -3,11 +3,11 @@
     {
       "id": "admin-1",
       "email": "admin@villaparadise.com",
-      "passwordHash": "$2a$10$SCFdV9m3zl1LFTaQjHZX.OhMslv6n48pN/gRp4K0xlhH7L.I59AIi",
+      "passwordHash": "$2a$10$9iCoHkHjMRqw2Kl27UkicONwnT0v/gr78bbvPm8tW5p/R8j6KVeAa",
       "name": "Admin Villa Paradise",
       "role": "ADMIN",
-      "createdAt": "2026-11-07T11:36:07.022Z",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z",
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     }
   ],
   "villas": [
@@ -31,8 +31,8 @@
       "basePriceIdr": 3500000,
       "weekendPriceIdr": 4200000,
       "isActive": true,
-      "createdAt": "2026-11-07T11:36:07.022Z",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z",
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     }
   ],
   "villa_images": [
@@ -43,7 +43,7 @@
       "caption": "Main Villa Exterior & Tropical Sun Deck",
       "isPrimary": true,
       "displayOrder": 1,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "img-2",
@@ -52,7 +52,7 @@
       "caption": "Private Infinity Pool Overlooking Rainforest",
       "isPrimary": false,
       "displayOrder": 2,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "img-3",
@@ -61,7 +61,7 @@
       "caption": "Open-Air Living Pavilion & Dining Area",
       "isPrimary": false,
       "displayOrder": 3,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "img-4",
@@ -70,7 +70,7 @@
       "caption": "Master Suite with King Bed & Forest View",
       "isPrimary": false,
       "displayOrder": 4,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "img-5",
@@ -79,7 +79,7 @@
       "caption": "En-suite Luxury Marble Bathroom with Terrazzo Tub",
       "isPrimary": false,
       "displayOrder": 5,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "img-6",
@@ -88,7 +88,7 @@
       "caption": "Fully Equipped Gourmet Kitchen and Island Bar",
       "isPrimary": false,
       "displayOrder": 6,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     }
   ],
   "villa_facilities": [
@@ -100,7 +100,7 @@
       "icon": "waves",
       "description": "Kolam renang air tawar pribadi dengan pemandangan lembah tropis spektakuler.",
       "isFeatured": true,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "fac-2",
@@ -110,7 +110,7 @@
       "icon": "wifi",
       "description": "Koneksi internet serat optik stabil dan cepat di seluruh area villa.",
       "isFeatured": true,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "fac-3",
@@ -120,7 +120,7 @@
       "icon": "wind",
       "description": "Unit AC inverter senyap di seluruh 3 kamar tidur.",
       "isFeatured": true,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "fac-4",
@@ -130,7 +130,7 @@
       "icon": "bath",
       "description": "Bak mandi terrazzo berendam mewah dengan view taman semi terbuka.",
       "isFeatured": true,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "fac-5",
@@ -140,7 +140,7 @@
       "icon": "coffee",
       "description": "Dapur lengkap dengan oven, kulkas 2 pintu, kompor induksi, dan mesin kopi kapsul.",
       "isFeatured": true,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "fac-6",
@@ -150,7 +150,7 @@
       "icon": "tv",
       "description": "Smart TV UHD dengan soundbar cinematic di ruang tamu utama.",
       "isFeatured": false,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "fac-7",
@@ -160,7 +160,7 @@
       "icon": "sparkles",
       "description": "Layanan kebersihan harian profesional untuk kenyamanan maksimal.",
       "isFeatured": true,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "fac-8",
@@ -170,7 +170,7 @@
       "icon": "shield-check",
       "description": "Area parkir mobil pribadi dengan gerbang otomatis dan pengawasan 24 jam.",
       "isFeatured": false,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     }
   ],
   "villa_pricing": [
@@ -182,7 +182,7 @@
       "endDate": "2027-01-05",
       "pricePerNightIdr": 5500000,
       "minStayNights": 2,
-      "createdAt": "2026-11-07T11:36:07.022Z"
+      "createdAt": "2026-11-07T12:11:29.197Z"
     }
   ],
   "bookings": [],
@@ -194,70 +194,70 @@
       "key": "WHATSAPP_NUMBER",
       "value": "6281234567890",
       "description": "Nomor WhatsApp admin untuk menerima inquiry booking customer",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-2",
       "key": "VILLA_NAME",
       "value": "Villa Paradise Sanctuary",
       "description": "Nama properti villa",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-3",
       "key": "CONTACT_PHONE",
       "value": "+62 812-3456-7890",
       "description": "Nomor telepon kontak resmi",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-4",
       "key": "CONTACT_EMAIL",
       "value": "booking@villaparadisesanctuary.com",
       "description": "Email resmi reservasi",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-5",
       "key": "ADDRESS",
       "value": "Jl. Raya Sayan No. 88, Ubud, Bali, Indonesia 80571",
       "description": "Alamat lengkap properti",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-6",
       "key": "CHECK_IN_TIME",
       "value": "14:00",
       "description": "Waktu standar check-in",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-7",
       "key": "CHECK_OUT_TIME",
       "value": "12:00",
       "description": "Waktu standar check-out",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-8",
       "key": "HOLD_HOURS",
       "value": "24",
       "description": "Batas durasi hold booking (dalam jam) untuk status PENDING",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-9",
       "key": "CANCELLATION_POLICY",
       "value": "Pembatalan gratis hingga 7 hari sebelum jadwal check-in. Pembatalan dalam kurun waktu 7 hari dikenakan biaya 50% dari total nilai pemesanan.",
       "description": "Kebijakan pembatalan reservasi",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     },
     {
       "id": "set-10",
       "key": "BOOKING_POLICY",
       "value": "Reservasi dianggap sah setelah pembayaran uang muka (DP) minimal 50% diterima dan dikonfirmasi oleh Admin Villa.",
       "description": "Ketentuan pemesanan",
-      "updatedAt": "2026-11-07T11:36:07.022Z"
+      "updatedAt": "2026-11-07T12:11:29.197Z"
     }
   ]
 }

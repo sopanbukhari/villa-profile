@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import prisma from '../db/prisma.js';
 import { AvailabilityService } from './availability.service.js';
 import { buildWhatsAppLink, generateWhatsAppMessage } from '../utils/whatsapp.js';
-import { parseDateOnly, formatDateOnly } from '../utils/date.js';
+import { parseDateOnly, formatDateOnly, validateBookingDates } from '../utils/date.js';
 import { BookingStatus } from '@prisma/client';
 
 export class BookingService {
@@ -146,6 +146,158 @@ export class BookingService {
       whatsappLink,
       whatsappMessage,
     };
+  }
+
+  /**
+   * Admin: Create manual booking directly from Admin Dashboard
+   */
+  static async createManualBooking(
+    data: {
+      villaId?: string;
+      customerName: string;
+      customerPhone: string;
+      customerEmail?: string;
+      checkIn: string;
+      checkOut: string;
+      guestCount: number;
+      totalAmountIdr?: number;
+      status?: 'INQUIRY' | 'PENDING' | 'CONFIRMED';
+      holdHours?: number;
+      adminNotes?: string;
+      specialRequests?: string;
+    },
+    adminId: string
+  ) {
+    let villaId = data.villaId;
+    if (!villaId || villaId === 'primary') {
+      const primary = await prisma.villa.findFirst({ where: { isActive: true } });
+      if (!primary) throw new Error('Data villa tidak ditemukan.');
+      villaId = primary.id;
+    }
+    const resolvedVillaId: string = villaId as string;
+
+    const validation = validateBookingDates(data.checkIn, data.checkOut);
+    if (!validation.isValid) {
+      throw new Error(validation.error);
+    }
+
+    const { checkInDate, checkOutDate, nights } = validation;
+    const status = data.status || 'CONFIRMED';
+
+    return prisma.$transaction(async (tx: any) => {
+      // If status is CONFIRMED or PENDING, check atomic overlaps
+      if (status === 'CONFIRMED' || status === 'PENDING') {
+        const now = new Date();
+        const conflictingBooking = await tx.booking.findFirst({
+          where: {
+            villaId: resolvedVillaId,
+            AND: [
+              { checkIn: { lt: checkOutDate } },
+              { checkOut: { gt: checkInDate } },
+              {
+                OR: [
+                  { status: 'CONFIRMED' },
+                  {
+                    status: 'PENDING',
+                    expiresAt: { gt: now },
+                  },
+                ],
+              },
+            ],
+          },
+        });
+
+        if (conflictingBooking) {
+          throw new Error(
+            `Double booking dicegah: Tanggal bentrok dengan booking ${conflictingBooking.bookingReference} (${conflictingBooking.status}).`
+          );
+        }
+
+        const conflictingBlock = await tx.blockedDate.findFirst({
+          where: {
+            villaId: resolvedVillaId,
+            startDate: { lt: checkOutDate },
+            endDate: { gt: checkInDate },
+          },
+        });
+
+        if (conflictingBlock) {
+          throw new Error(
+            `Tanggal bentrok dengan penutupan/blokir admin (${conflictingBlock.reason || 'Ditutup'}).`
+          );
+        }
+      }
+
+      // Calculate total amount if not specified
+      let totalAmount = data.totalAmountIdr;
+      let baseRate = 0;
+      if (!totalAmount || totalAmount <= 0) {
+        const availability = await AvailabilityService.checkAvailability(
+          resolvedVillaId,
+          data.checkIn,
+          data.checkOut,
+          data.guestCount
+        );
+        totalAmount = availability.totalEstimatedPrice;
+        baseRate = availability.averageNightlyRate;
+      } else {
+        baseRate = Math.round(totalAmount / nights);
+      }
+
+      let expiresAt: Date | null = null;
+      if (status === 'PENDING') {
+        const holdHours = data.holdHours || 24;
+        expiresAt = new Date(Date.now() + holdHours * 3600 * 1000);
+      }
+
+      // Generate reference
+      let bookingReference = this.generateReference();
+      let exists = await tx.booking.findUnique({ where: { bookingReference } });
+      while (exists) {
+        bookingReference = this.generateReference();
+        exists = await tx.booking.findUnique({ where: { bookingReference } });
+      }
+
+      const booking = await tx.booking.create({
+        data: {
+          bookingReference,
+          villaId: resolvedVillaId,
+          customerName: data.customerName,
+          customerEmail: data.customerEmail || null,
+          customerPhone: data.customerPhone,
+          checkIn: checkInDate,
+          checkOut: checkOutDate,
+          totalNights: nights,
+          guestCount: data.guestCount,
+          baseRateIdr: baseRate,
+          totalAmountIdr: totalAmount,
+          status,
+          expiresAt,
+          adminNotes: data.adminNotes || null,
+          specialRequests: data.specialRequests || null,
+        },
+        include: {
+          villa: { select: { name: true } },
+        },
+      });
+
+      await tx.bookingStatusLog.create({
+        data: {
+          bookingId: booking.id,
+          previousStatus: null,
+          newStatus: status,
+          changedById: adminId,
+          notes: data.adminNotes || `Booking dibuat manual oleh admin (${status})`,
+        },
+      });
+
+      return {
+        ...booking,
+        checkIn: formatDateOnly(booking.checkIn),
+        checkOut: formatDateOnly(booking.checkOut),
+        totalAmountIdr: Number(booking.totalAmountIdr),
+      };
+    });
   }
 
   /**

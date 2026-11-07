@@ -52,3 +52,18 @@ export const createPricingRuleSchema = z.object({
 });
 
 export const updateSettingsSchema = z.record(z.string());
+
+export const createAdminBookingSchema = z.object({
+  villaId: z.string().optional().default('primary'),
+  customerName: z.string().min(2, 'Nama pemesan minimal 2 karakter').max(100),
+  customerPhone: z.string().min(8, 'Nomor telepon/WhatsApp minimal 8 digit').max(25),
+  customerEmail: z.string().email('Format email tidak valid').optional().or(z.literal('')),
+  checkIn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Format tanggal check-in harus YYYY-MM-DD'),
+  checkOut: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Format tanggal check-out harus YYYY-MM-DD'),
+  guestCount: z.coerce.number().min(1, 'Jumlah tamu minimal 1 orang').default(2),
+  totalAmountIdr: z.coerce.number().optional(),
+  status: z.enum(['INQUIRY', 'PENDING', 'CONFIRMED']).default('CONFIRMED'),
+  holdHours: z.coerce.number().min(1).max(168).optional().default(24),
+  adminNotes: z.string().max(500).optional(),
+  specialRequests: z.string().max(500).optional(),
+});

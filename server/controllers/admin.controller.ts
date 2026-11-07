@@ -13,6 +13,7 @@ import {
   createGalleryImageSchema,
   createPricingRuleSchema,
   updateSettingsSchema,
+  createAdminBookingSchema,
 } from '../validators/admin.validator.js';
 import { updateBookingStatusSchema, blockedDateSchema } from '../validators/booking.validator.js';
 
@@ -109,6 +110,24 @@ export class AdminController {
         limit: req.query.limit ? parseInt(req.query.limit as string, 10) : 20,
       });
       res.json({ success: true, ...result });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * POST /api/admin/bookings
+   */
+  static async createBooking(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+    try {
+      const data = createAdminBookingSchema.parse(req.body);
+      const adminId = req.admin!.id;
+      const booking = await BookingService.createManualBooking(data, adminId);
+      res.status(201).json({
+        success: true,
+        message: 'Booking berhasil ditambahkan.',
+        data: booking,
+      });
     } catch (error) {
       next(error);
     }

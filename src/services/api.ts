@@ -138,6 +138,27 @@ export const api = {
     return { data: res.data, pagination: res.pagination };
   },
 
+  async createAdminBooking(payload: {
+    villaId?: string;
+    customerName: string;
+    customerPhone: string;
+    customerEmail?: string;
+    checkIn: string;
+    checkOut: string;
+    guestCount: number;
+    totalAmountIdr?: number;
+    status?: 'INQUIRY' | 'PENDING' | 'CONFIRMED';
+    holdHours?: number;
+    adminNotes?: string;
+    specialRequests?: string;
+  }): Promise<BookingDetail> {
+    const res = await request<{ success: boolean; data: BookingDetail }>('/admin/bookings', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+    return res.data;
+  },
+
   async updateBookingStatus(
     bookingId: string,
     status: BookingStatus,
