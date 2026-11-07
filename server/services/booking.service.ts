@@ -245,7 +245,7 @@ export class BookingService {
     ]);
 
     return {
-      data: items.map((b) => ({
+      data: items.map((b: any) => ({
         id: b.id,
         bookingReference: b.bookingReference,
         villaName: b.villa.name,
@@ -288,7 +288,7 @@ export class BookingService {
       holdHours?: number;
     }
   ) {
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: any) => {
       const booking = await tx.booking.findUnique({
         where: { id: bookingId },
       });
@@ -424,7 +424,7 @@ export class BookingService {
       pendingBookings,
       confirmedBookings,
       upcomingBookings,
-      recentBookings: recentBookings.map((b) => ({
+      recentBookings: recentBookings.map((b: any) => ({
         id: b.id,
         bookingReference: b.bookingReference,
         customerName: b.customerName,

@@ -32,7 +32,7 @@ export class VillaService {
       ...villa,
       basePriceIdr: Number(villa.basePriceIdr),
       weekendPriceIdr: villa.weekendPriceIdr ? Number(villa.weekendPriceIdr) : null,
-      pricing: villa.pricing.map((p) => ({
+      pricing: villa.pricing.map((p: any) => ({
         ...p,
         startDate: formatDateOnly(p.startDate),
         endDate: formatDateOnly(p.endDate),
@@ -55,7 +55,7 @@ export class VillaService {
       orderBy: { createdAt: 'asc' },
     });
 
-    return villas.map((v) => ({
+    return villas.map((v: any) => ({
       ...v,
       basePriceIdr: Number(v.basePriceIdr),
       weekendPriceIdr: v.weekendPriceIdr ? Number(v.weekendPriceIdr) : null,
@@ -91,7 +91,7 @@ export class VillaService {
       ...villa,
       basePriceIdr: Number(villa.basePriceIdr),
       weekendPriceIdr: villa.weekendPriceIdr ? Number(villa.weekendPriceIdr) : null,
-      pricing: villa.pricing.map((p) => ({
+      pricing: villa.pricing.map((p: any) => ({
         ...p,
         startDate: formatDateOnly(p.startDate),
         endDate: formatDateOnly(p.endDate),
@@ -245,7 +245,7 @@ export class VillaService {
       orderBy: { startDate: 'asc' },
     });
 
-    return list.map((b) => ({
+    return list.map((b: any) => ({
       id: b.id,
       startDate: formatDateOnly(b.startDate),
       endDate: formatDateOnly(b.endDate),

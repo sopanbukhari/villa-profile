@@ -179,9 +179,9 @@ export class AvailabilityService {
       const dateKey = formatDateOnly(currentNightDate);
 
       // Check custom pricing rules
-      const customRule = villa.pricing.find((rule) => {
-        const start = rule.startDate.getTime();
-        const end = rule.endDate.getTime();
+      const customRule = villa.pricing.find((rule: any) => {
+        const start = new Date(rule.startDate).getTime();
+        const end = new Date(rule.endDate).getTime();
         const curr = currentNightDate.getTime();
         return curr >= start && curr <= end;
       });
@@ -277,14 +277,14 @@ export class AvailabilityService {
     });
 
     return {
-      bookings: bookings.map((b) => ({
+      bookings: bookings.map((b: any) => ({
         id: b.id,
         reference: b.bookingReference,
         status: b.status,
         checkIn: formatDateOnly(b.checkIn),
         checkOut: formatDateOnly(b.checkOut),
       })),
-      blockedDates: blocked.map((d) => ({
+      blockedDates: blocked.map((d: any) => ({
         id: d.id,
         startDate: formatDateOnly(d.startDate),
         endDate: formatDateOnly(d.endDate),

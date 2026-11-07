@@ -27,7 +27,10 @@ export function parseDateOnly(dateStr: string): Date {
 /**
  * Format a Date to YYYY-MM-DD
  */
-export function formatDateOnly(date: Date): string {
+export function formatDateOnly(date: Date | string): string {
+  if (typeof date === 'string') {
+    return date.split('T')[0];
+  }
   const d = new Date(date);
   const year = d.getUTCFullYear();
   const month = String(d.getUTCMonth() + 1).padStart(2, '0');
